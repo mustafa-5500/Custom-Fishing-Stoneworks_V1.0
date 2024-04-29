@@ -206,6 +206,9 @@ public class GameManagerImpl implements GameManager {
         }
     }
 
+    /*
+    Game with red, yellow and green bars, with the condition of hitting the green bar
+     */
     private void registerAccurateClickGame() {
         this.registerGameType("accurate_click", (section -> {
 
@@ -239,6 +242,9 @@ public class GameManagerImpl implements GameManager {
                     );
                 }
 
+                /*
+                Moves the pointer face every tick, and makes it bounce off the edges of the bar
+                 */
                 @Override
                 public void onTick() {
                     if (face) progress++;
@@ -264,7 +270,9 @@ public class GameManagerImpl implements GameManager {
                 @Override
                 public boolean isSuccessful() {
                     if (isTimeOut) return false;
+                    //progress is the position of the pointer, last gets which section the pointer is in.
                     int last = progress / widthPerSection;
+                    //returns the chance of getting fish, so hitting the green is 100% while each subsequent colour is less
                     return (Math.random() < successRate[last]);
                 }
             };
@@ -313,6 +321,9 @@ public class GameManagerImpl implements GameManager {
                     );
                 }
 
+                /*
+                The stardew valley fishing minigame, with a bar that has to follow a fish.
+                 */
                 @Override
                 public void onTick() {
                     if (player.isSneaking()) addV();
